@@ -22,6 +22,10 @@ export default function DataTable() {
   const fetchWallets = async() => {
     try {
       const fetchResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wallet-controller/get-wallets`)
+      if(fetchResponse.status == 204){
+        setRows([])
+        return;
+      }
       const data = await fetchResponse.json();
       setRows(data)
     } catch (error) {
@@ -134,7 +138,7 @@ export default function DataTable() {
 
   return (
     <Container>
-        <Grid mt={3} xs={12} mb={1} sx={{display: 'flex',flexDirection: 'row',flexWrap: 'nowrap',justifyContent: 'center',alignItems: 'center'}}>
+        <Grid mt={3} mb={1} sx={{display: 'flex',flexDirection: 'row',flexWrap: 'nowrap',justifyContent: 'center',alignItems: 'center'}}>
           <Grid xl={4} mr={1}>
             <Typography>Insert wallet Address:</Typography>
           </Grid>
