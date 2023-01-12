@@ -49,6 +49,15 @@ The main goal is to build a generic platform that return analytics on Ethereum w
   npm run start:dev
   ```
 
+## Swagger / Api Doc
+
+If you want to try out the API, you can access to a swagger instance I created under the following path:
+
+  ```sh
+  http://URL:3001/digital-wallet-backend
+  ```
+
+
 ## Docker Compose
 
 In case you want to run it Dockerized, I included a docker compose file that will:
