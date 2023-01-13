@@ -98,3 +98,4 @@ Simply run the following command:
   ```sh
   docker-compose up -d
   ```
+Note: It takes a while to download all dependencies, please be patient :) 
