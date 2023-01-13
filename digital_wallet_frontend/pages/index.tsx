@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -6,17 +6,14 @@ import { IconButton, Button, TextField,Grid  } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Link from '../src/Link';
-import axios from 'axios';
-import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
+import walletAPI from '../src/variables/WalletApi';
 
 export default function DataTable() {
   const [rows, setRows] = useState([]);
   const [updateData, setUpdateData] = useState(false);
   const [walletAddress, setWalletAddress] = useState('');
   const [error, setError] = useState(false);
-
-  const walletAPI = axios.create({baseURL: process.env.NEXT_PUBLIC_API_URL});
 
 
   const fetchWallets = async() => {
@@ -29,7 +26,7 @@ export default function DataTable() {
       const data = await fetchResponse.json();
       setRows(data)
     } catch (error) {
-      alert(error)
+      console.error
     }
 
   }
@@ -39,7 +36,7 @@ export default function DataTable() {
       const { data } = await walletAPI.put('/wallet-controller/fav-wallet', { address });
       setUpdateData(true)
     } catch (error) {
-      alert(error)
+      console.error
     }
 
   }
@@ -49,7 +46,7 @@ export default function DataTable() {
       const { data } = await walletAPI.post(`/wallet-controller/remove-wallet/${address}`);
       setUpdateData(true)
     } catch (error) {
-      alert(error)
+      console.error
     }
 
   }
@@ -66,7 +63,7 @@ export default function DataTable() {
         setUpdateData(true)      
       }
     } catch (error) {
-      alert(error)
+      console.error
     }
 
   }
@@ -139,14 +136,11 @@ export default function DataTable() {
   return (
     <Container>
         <Grid mt={3} mb={1} sx={{display: 'flex',flexDirection: 'row',flexWrap: 'nowrap',justifyContent: 'center',alignItems: 'center'}}>
-          <Grid xl={4} mr={1}>
-            <Typography>Insert wallet Address:</Typography>
-          </Grid>
-          <Grid xl={4}>
+          <Grid xl={4} >
             <TextField error={error} id={style} label="Wallet Address" variant="outlined" value={walletAddress} onChange={(e) => handleTextChange(e)}></TextField>
           </Grid>
           <Grid xl={4} ml={1}>
-            <Button onClick={saveWallet}>Save</Button>
+            <Button onClick={saveWallet} variant="contained" color="success">+</Button>
           </Grid>
         </Grid>      
       <Box

@@ -8,37 +8,15 @@ import EditIcon from '@mui/icons-material/Edit';
 import CloseIcon from '@mui/icons-material/Close';
 import CheckIcon from '@mui/icons-material/Check';
 import CardActions from '@mui/material/CardActions';
-import axios from 'axios';
-
-
-interface Currency {
-  id: number,
-  description: string,
-  createdAt: Date,
-  deletedAt: Date,
-}
-
-interface Rate {
-  id: number,
-  rate: number,
-  currency: Currency,
-  createdAt: Date,
-  deletedAt: Date
-}
-
-interface ExchangeRate {
-  currency: string,
-  rate: number,
-  updateRate: (currency:string,rate: number) => void,
-  refreshRates: () => void
-}
+import { ExchangeRate } from '../interfaces/ExchangeRate';
+import walletAPI from '../variables/WalletApi';
 
 export default function ExchangeRateCard(props:ExchangeRate) {
   const [editing, setEditing] = useState(false);
   const [exchangeRate, setExchangeRate] = useState(0);
   const [currency, setCurrency] = useState('USD');
   const [error, setError] = useState(false);
-  const walletAPI = axios.create({baseURL: process.env.NEXT_PUBLIC_API_URL});
+  
 
   useEffect(() => {
     if(props.rate){
@@ -84,7 +62,7 @@ export default function ExchangeRateCard(props:ExchangeRate) {
   const style = error ? "outlined-error" : "outlined-basic"
 
   return (
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 290, minHeight:180}}>
       <CardHeader
         subheader={'Exchange Rate:'}
         action={
@@ -116,7 +94,7 @@ export default function ExchangeRateCard(props:ExchangeRate) {
         }
       </CardContent>
       <CardActions sx={{flex:1, flexDirection:'row',justifyContent:'center',alignContent:'center'}}>
-        <Button size="small" onClick={handleUpdateExternalRates}>Update Rates from CryptoCompare.com</Button>
+        {editing? <></>: <><Button size="small" onClick={handleUpdateExternalRates}>Update Rates from CryptoCompare.com</Button></>}
       </CardActions>
     </Card>
   );

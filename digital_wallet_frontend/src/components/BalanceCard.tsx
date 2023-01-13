@@ -8,45 +8,18 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
-
-interface Currency {
-  id: number,
-  description: string,
-  createdAt: Date,
-  deletedAt: Date,
-}
-
-interface Rate {
-  id: number,
-  rate: number,
-  currency: Currency,
-  createdAt: Date,
-  deletedAt: Date
-}
-
-
-interface Balance {
-  rates: Rate[],
-  rate: number,
-  balance: number,
-  changeRate: (currency: string) => void
-}
-
+import { Rate } from '../interfaces/Rate';
+import { Balance } from '../interfaces/Balance';
 
 
 export default function BalanceCard(props: Balance) {
-  const [editing, setEditing] = React.useState(false);
-  const [exchangeRate, setExchangeRate] = React.useState(0);
   const [balance, setBalance] = React.useState(0);
   const [convertedBalance, setConvertedBalance] = React.useState(0);
-  const [error, setError] = React.useState(false);
   const [currency, setCurrency] = React.useState('USD');
   const [rates, setRates] = React.useState<Rate[]>();
 
   useEffect(() => {
     if(props.rate || props.balance || props.rates){
-      setExchangeRate(props.rate);
       setBalance(Number(props.balance.toFixed(2)));
       const converted = props.rate * props.balance;
       setConvertedBalance(Number(converted.toFixed(2)))
@@ -56,18 +29,12 @@ export default function BalanceCard(props: Balance) {
 
   const handleChange = (event: any) => {
     setCurrency(event.target.value);
-    props.changeRate(event.target.value)
+    props.changeCurrency(event.target.value)
   };
-
-  const handleTextChange = (e : any) => {
-    setExchangeRate(e.target.value);
-  };  
-
-  const style = error ? "outlined-error" : "outlined-basic"
 
   return (
     rates? 
-    <Card sx={{ minWidth: 275 }}>
+    <Card sx={{ minWidth: 290, minHeight:180 }}>
       <CardHeader sx={{ flex:1, flexDirection: 'row',alignItems: 'flex-end'}}
         subheader={
           <Typography mr={2}>{balance} ETH to: </Typography>
@@ -92,7 +59,7 @@ export default function BalanceCard(props: Balance) {
       <CardContent>
         {
           <>
-            <Typography align='center' fontWeight='bold'>{convertedBalance}</Typography>
+            <Typography align='center' fontWeight='bold'>{convertedBalance} $</Typography>
           </>
         }
       </CardContent>
