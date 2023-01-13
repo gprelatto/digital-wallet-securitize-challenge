@@ -26,6 +26,12 @@ The main goal is to build a generic platform that return analytics on Ethereum w
   npm start
   ```
 
+### ENV Variables
+  
+```sh
+NEXT_PUBLIC_API_URL= database API URL
+```
+
 ## Backend
 
 ### Technology
@@ -34,6 +40,25 @@ The main goal is to build a generic platform that return analytics on Ethereum w
 * TypeORM
 * TypeScript
 * Etherscan
+
+### ENV Variables
+  
+In order to use them, you shoud add the .env file inside src/common/envs/
+  
+```sh
+PORT= database port
+BASE_URL= api base URL
+DATABASE_HOST= database server 
+DATABASE_NAME= database name
+DATABASE_USER= database user
+DATABASE_PASSWORD= database password
+DATABASE_PORT= database port
+DATABASE_SCHEMA= database schema
+DATABASE_SYNC= enable or disable database sync (use on false)
+DATABASE_RUN_MIGRATIONS= enable or disable run migrations (use true)
+DATABASE_MIGRATIONS_TABLE_NAME= migrations table name (use migration)
+ETHERSCAN_API_KEY= api key from etherscan
+```
 
 ### How to start it?
 1. Install Packages
