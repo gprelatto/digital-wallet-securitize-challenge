@@ -21,5 +21,8 @@ export default new DataSource({
     migrationsTableName: process.env.DATABASE_MIGRATIONS_TABLE_NAME,
     logging: 'all',
     logger: 'file',
-    synchronize: process.env.DATABASE_SYNC === "true"    
+    synchronize: process.env.DATABASE_SYNC === "true",
+    ssl:{
+        rejectUnauthorized: process.env.REJECT_UNAUTHORIZED === "true"
+    }
 });

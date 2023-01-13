@@ -22,7 +22,10 @@ export class DbModule implements TypeOrmOptionsFactory {
             entities: [Wallet, Currency, ExchangeRate],
             synchronize: this.config.get('DATABASE_SYNC') === "true",
             logging: true,
-            retryAttempts: 0
+            retryAttempts: 0,
+            ssl:{
+                rejectUnauthorized: this.config.get('REJECT_UNAUTHORIZED') === "true"
+            }
         }
     }
 };
