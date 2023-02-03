@@ -8,6 +8,7 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import Link from '../src/Link';
 import CloseIcon from '@mui/icons-material/Close';
 import walletAPI from '../src/variables/WalletApi';
+import WalletConnectProvider from '@walletconnect/ethereum-provider';
 
 export default function DataTable() {
   const [rows, setRows] = useState([]);
@@ -15,6 +16,20 @@ export default function DataTable() {
   const [walletAddress, setWalletAddress] = useState('');
   const [error, setError] = useState(false);
 
+
+  const connect = async() =>  {
+    const provider = new WalletConnectProvider({
+      bridge: 'https://bridge.walletconnect.org',
+      infuraId: undefined,
+      clientMeta: {
+        description: "WalletConnect NodeJS Client",
+        url: "https://nodejs.org/en/",
+        icons: ["https://nodejs.org/static/images/logo.svg"],
+        name: "WalletConnect",
+      }
+    });
+    await provider.enable();
+  }
 
   const fetchWallets = async() => {
     try {
@@ -139,9 +154,12 @@ export default function DataTable() {
           <Grid xl={4} >
             <TextField error={error} id={style} label="Wallet Address" variant="outlined" value={walletAddress} onChange={(e) => handleTextChange(e)}></TextField>
           </Grid>
-          <Grid xl={4} ml={1}>
+          <Grid xl={3} ml={1}>
             <Button onClick={saveWallet} variant="contained" color="success">+</Button>
           </Grid>
+          <Grid xl={1} ml={1}>
+            <Button onClick={connect} variant="contained" color="success">connect</Button>
+          </Grid>          
         </Grid>      
       <Box
         sx={{
