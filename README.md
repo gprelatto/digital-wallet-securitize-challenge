@@ -1,6 +1,14 @@
-# Digital Wallet Challente
+# Digital Wallet Challenge
 This is a challenge for securitize.io
 The main goal is to build a generic platform that return analytics on Ethereum wallets.
+
+## Live Build
+You can access to a live cloud version of this repo using the links below, it is using DigitalOcean APP Platform:
+   ```sh
+  Front-End: https://challenge-securitize-frontend-gxies.ondigitalocean.app/
+  Back-End API: https://challenge-securitize-backend-st5j6.ondigitalocean.app/walletAPI
+  Back-End Swagger: https://challenge-securitize-backend-st5j6.ondigitalocean.app/digital-wallet-backend
+  ```
 
 ## FrontEnd
 
