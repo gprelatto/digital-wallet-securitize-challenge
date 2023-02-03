@@ -1,4 +1,4 @@
-# Digital Wallet Challente
+# Digital Wallet Challenge
 This is a challenge for securitize.io
 The main goal is to build a generic platform that return analytics on Ethereum wallets.
 
